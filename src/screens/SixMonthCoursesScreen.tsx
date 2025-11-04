@@ -69,6 +69,7 @@ const sixMonthCourses: Course[] = [
   },
 ];
 
+
 const SixMonthCoursesScreen: React.FC<Props> = ({ navigation }) => {
   return (
     <ImageBackground
