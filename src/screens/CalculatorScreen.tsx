@@ -10,6 +10,7 @@ import {
   Linking,
   BackHandler,
   ImageBackground,
+  TextInput, 
 } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import { StackNavigationProp } from '@react-navigation/stack';
@@ -43,7 +44,9 @@ const allCourses: Course[] = [
 
 const CalculatorScreen: React.FC<Props> = ({ navigation }) => {
   const [selectedCourses, setSelectedCourses] = useState<string[]>([]);
-  const [action, setAction] = useState<string>(''); 
+  const [action, setAction] = useState<string>('');
+  const [fullName, setFullName] = useState('');  
+  const [email, setEmail] = useState('');       
 
   const toggleCourse = (courseId: string) => {
     setSelectedCourses(prev =>
@@ -129,6 +132,53 @@ const CalculatorScreen: React.FC<Props> = ({ navigation }) => {
     setAction('');
   };
 
+ 
+  const handleConfirm = () => {
+    if (selectedCourses.length === 0) {
+      Alert.alert('Select courses', 'Please select at least one course before confirming.');
+      return;
+    }
+    if (!fullName.trim()) {
+      Alert.alert('Name required', 'Please enter your full name.');
+      return;
+    }
+    const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    if (!emailOk) {
+      Alert.alert('Valid email required', 'Please enter a valid email address.');
+      return;
+    }
+
+    const total = calculateTotal();
+    const discount = calculateDiscount(total);
+    const finalAmount = total - discount;
+
+    const selectedList = selectedCourses
+      .map(id => {
+        const c = allCourses.find(x => x.id === id);
+        return c ? `• ${c.name} (${c.duration}) – R${c.fee.toLocaleString()}` : '';
+      })
+      .filter(Boolean)
+      .join('%0A');
+
+    const subject = encodeURIComponent(`Enrollment request from ${fullName}`);
+    const body = encodeURIComponent(
+      `Hello Empowering the Nation,%0A%0A` +
+      `I would like to enroll in the following course(s):%0A${selectedList}%0A%0A` +
+      `Subtotal: R${total.toLocaleString()}%0A` +
+      (discount > 0 ? `Discount: -R${discount.toLocaleString()}%0A` : ``) +
+      `Total: R${finalAmount.toLocaleString()}%0A%0A` +
+      `My details:%0A` +
+      `Name: ${fullName}%0A` +
+      `Email: ${email}%0A%0A` +
+      `Please contact me with next steps. Thank you!`
+    );
+
+    const mailto = `mailto:empoweringthenation@gmail.com?subject=${subject}&body=${body}`;
+    Linking.openURL(mailto).catch(() => {
+      Alert.alert('Could not open mail app', 'Please email us at empoweringthenation@gmail.com.');
+    });
+  };
+
   return (
     <ImageBackground
       source={require('../../assets/App Background.png')}
@@ -168,6 +218,7 @@ const CalculatorScreen: React.FC<Props> = ({ navigation }) => {
             <Text style={styles.discountText}>• 15% discount when enrolling in 3+ courses</Text>
           </View>
 
+         
           <View style={styles.section}>
             <Text style={styles.sectionTitle}>Six Week Courses (R750 each)</Text>
             {sixWeekCourses.map(course => (
@@ -256,7 +307,78 @@ const CalculatorScreen: React.FC<Props> = ({ navigation }) => {
             </View>
           )}
 
-         
+        
+          {selectedCourses.length > 0 && (
+            <View
+              style={{
+                backgroundColor: 'rgba(255,255,255,0.95)',
+                padding: 16,
+                borderRadius: 12,
+                marginBottom: 20,
+                shadowColor: '#000',
+                shadowOffset: { width: 0, height: 2 },
+                shadowOpacity: 0.15,
+                shadowRadius: 3,
+                elevation: 3,
+              }}
+            >
+              <Text style={{ fontSize: 20, fontWeight: '700', color: '#1f2937', marginBottom: 10 }}>
+                Your Details
+              </Text>
+
+              <TextInput
+                placeholder="Full Name"
+                placeholderTextColor="#94a3b8"
+                value={fullName}
+                onChangeText={setFullName}
+                style={{
+                  backgroundColor: '#f1f5f9',
+                  borderColor: '#cbd5e1',
+                  borderWidth: 1,
+                  borderRadius: 10,
+                  paddingHorizontal: 12,
+                  paddingVertical: 10,
+                  fontSize: 16,
+                  color: '#0f172a',
+                  marginBottom: 12,
+                }}
+              />
+              <TextInput
+                placeholder="Email Address"
+                placeholderTextColor="#94a3b8"
+                keyboardType="email-address"
+                autoCapitalize="none"
+                value={email}
+                onChangeText={setEmail}
+                style={{
+                  backgroundColor: '#f1f5f9',
+                  borderColor: '#cbd5e1',
+                  borderWidth: 1,
+                  borderRadius: 10,
+                  paddingHorizontal: 12,
+                  paddingVertical: 10,
+                  fontSize: 16,
+                  color: '#0f172a',
+                  marginBottom: 12,
+                }}
+              />
+
+              <TouchableOpacity
+                onPress={handleConfirm}
+                style={{
+                  backgroundColor: '#28a745',
+                  paddingVertical: 14,
+                  borderRadius: 12,
+                  alignItems: 'center',
+                }}
+              >
+                <Text style={{ color: '#fff', fontSize: 16, fontWeight: '700' }}>
+                  Confirm & Email Quote
+                </Text>
+              </TouchableOpacity>
+            </View>
+          )}
+
           <TouchableOpacity
             style={styles.clearButton}
             onPress={() => setSelectedCourses([])}
@@ -344,7 +466,6 @@ const styles = StyleSheet.create({
   summaryTitle: { fontSize: 28, color: '#A0AEC0', marginBottom: 8 },
   totalAmount: { fontSize: 24, fontWeight: 'bold', color: '#FFFFFF', marginBottom: 5 },
   savings: { fontSize: 14, color: '#68D391', fontWeight: '600' },
-
 
   dropdownWrapper: {
     backgroundColor: '#28a745',
