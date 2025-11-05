@@ -35,9 +35,13 @@ const sixMonthCourses: Course[] = [
     These is the content for the child minding course:
 
     - Birth to six-month old baby needs
+
     - Seven-Month to one year old needs
+
     - Toddler needs
+
     - Educational toys`,
+    
     duration: '6 weeks',
     fee: 'R750',
   },
@@ -48,10 +52,15 @@ const sixMonthCourses: Course[] = [
     These is the content for the cooking course:
 
     -Nutritional requirements for a healthy body
+
     -Types of protein, carbohydrates and vegetables
+
     -Planning meals
+
     -Tasty and nutritious recipes
+
     -Preparation and cooking of meals`,
+
     duration: '6 weeks',
     fee: 'R750',
   },
@@ -62,8 +71,11 @@ const sixMonthCourses: Course[] = [
     These is the content for the garden maintenance course:
 
     - Watering restrictions and the watering requirements of indigenous and exotic plants
+
     - Pruning and propagation of plants
+
     - Planting techniques for different plant types`,
+
     duration: '6 weeks',
     fee: 'R750',
   },
@@ -110,7 +122,7 @@ const SixMonthCoursesScreen: React.FC<Props> = ({ navigation }) => {
 
         <ScrollView contentContainerStyle={styles.scrollContent}>
           <View style={styles.header}>
-            <Text style={styles.title}>Six Week Courses</Text>
+            <Text style={styles.title}>Six Month Courses</Text>
             <Text style={styles.subtitle}>Comprehensive professional development programs</Text>
           </View>
 
@@ -174,6 +186,7 @@ const styles = StyleSheet.create({
     marginBottom: 15,
     borderWidth: 1,
     borderColor: '#e9ecef',
+    
   },
   courseTitle: { fontSize: 18, fontWeight: 'bold', color: '#000', marginBottom: 5 },
   courseDuration: { fontSize: 14, color: '#4A90E2', fontWeight: '600', marginBottom: 10 },
@@ -185,7 +198,7 @@ const styles = StyleSheet.create({
     padding: 20,
     marginBottom: 30,
   },
-  infoTitle: { fontSize: 18, fontWeight: 'bold', color: '#2c3e50', marginBottom: 10 },
+  infoTitle: { fontSize: 18, fontWeight: 'bold', color: '#2c3e50', marginBottom: 1 },
   infoText: { fontSize: 20, color: '#5d6d7e', lineHeight: 20 },
   dropdownWrapper: {
     backgroundColor: '#28a745',

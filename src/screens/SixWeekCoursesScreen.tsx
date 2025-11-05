@@ -36,10 +36,15 @@ const sixWeekCourses: Course[] = [
     This is the content for the first aid course:
 
     - Wounds and bleeding
+
     - Burns and fractures
+
     - Emergency scene management
+
     - Cardio-pulmonary resuscitation (CPR)
+
     - Respiratory distress e.g., choking, blocked airway`,
+
     duration: '6 Months',
     fee: 'R1,500',
   },
@@ -48,11 +53,17 @@ const sixWeekCourses: Course[] = [
     description: `Purpose: Master the art of sewing and garment repair. Learn to use sewing machines, hand stitching techniques, pattern reading, and basic tailoring skills.
 
     This is the content for the sewing course:
+
     - Types of stitches
+
     - Threading a sewing machine
+
     - Sewing buttons, zips, hems, and seams
+
     - Alterations
+
     - Designing and sewing new garments`,
+
     duration: '6 Months',
     fee: 'R1,500',
   },
@@ -61,11 +72,17 @@ const sixWeekCourses: Course[] = [
     description: `Purpose: To provide landscaping services for new and established gardens.
 
     This is the content for the landscaping course:
+
     - Indigenous and exotic plants and trees
+
     - Fixed structures (fountains, benches, built-in braai)
+
     - Balancing of plants and trees in a garden
+
     - Aesthetics of plant shapes and colours
+
     - Garden layout`,
+
     duration: '6 Months',
     fee: 'R1,500',
   },
@@ -74,10 +91,15 @@ const sixWeekCourses: Course[] = [
     description: `Purpose: To provide skills to navigate basic life necessities.
 
     This is the content for the life skills course:
+
     - Opening a bank account 
+
     - Basic Labour law (know your rights)
+
     - Basic reading and writing literacy
+
     - Basic numeric literacy`,
+    
     duration: '6 Months',
     fee: 'R1,500',
   },
