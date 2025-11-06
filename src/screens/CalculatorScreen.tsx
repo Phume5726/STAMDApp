@@ -118,10 +118,10 @@ const CalculatorScreen: React.FC<Props> = ({ navigation }) => {
       case 'contact':
         Alert.alert(
           'Ready to Enroll?',
-          'Contact us to complete your enrollment:\n\nPhone: +27 11 234 5678\nEmail: info@empoweringthenation.co.za',
+          'Contact us to complete your enrollment:\n\nPhone: +27 79 767 4940\nEmail: empowering@thenation.co.za',
           [
-            { text: 'Call Now', onPress: () => Linking.openURL('tel:+27112345678') },
-            { text: 'Send Email', onPress: () => Linking.openURL('mailto:info@empoweringthenation.co.za') },
+            { text: 'Call Now', onPress: () => Linking.openURL('tel:+27797674940') },
+            { text: 'Send Email', onPress: () => Linking.openURL('mailto:empowering@thenation.co.za') },
             { text: 'Later', style: 'cancel' },
           ]
         );
@@ -173,9 +173,9 @@ const CalculatorScreen: React.FC<Props> = ({ navigation }) => {
       `Please contact me with next steps. Thank you!`
     );
 
-    const mailto = `mailto:empoweringthenation@gmail.com?subject=${subject}&body=${body}`;
+    const mailto = `mailto:empowering@thenation.co.za?subject=${subject}&body=${body}`;
     Linking.openURL(mailto).catch(() => {
-      Alert.alert('Could not open mail app', 'Please email us at empoweringthenation@gmail.com.');
+      Alert.alert('Could not open mail app', 'Please email us at empowering@thenation.co.za.');
     });
   };
 
@@ -201,7 +201,7 @@ const CalculatorScreen: React.FC<Props> = ({ navigation }) => {
                 value="quote"
                 enabled={selectedCourses.length > 0}
               />
-              <Picker.Item label="← Back: Six Month Courses" value="backSixMonth" />
+              <Picker.Item label="Back: Six Month Courses" value="backSixMonth" />
               <Picker.Item label="Home" value="home" />
               <Picker.Item label="Contact Us to Enroll" value="contact" />
             </Picker>
@@ -214,8 +214,8 @@ const CalculatorScreen: React.FC<Props> = ({ navigation }) => {
 
           <View style={styles.discountInfo}>
             <Text style={styles.discountTitle}>Special Discounts Available!</Text>
-            <Text style={styles.discountText}>• 5% discount when enrolling in 2 courses</Text>
-            <Text style={styles.discountText}>• 15% discount when enrolling in 3+ courses</Text>
+            <Text style={styles.discountText}>- 5% discount when enrolling in 2 courses</Text>
+            <Text style={styles.discountText}>- 15% discount when enrolling in 3+ courses</Text>
           </View>
 
          
@@ -248,7 +248,7 @@ const CalculatorScreen: React.FC<Props> = ({ navigation }) => {
                   ]}
                 >
                   {selectedCourses.includes(course.id) && (
-                    <Text style={styles.checkmark}>✓</Text>
+                    <Text style={styles.checkmark}></Text>
                   )}
                 </View>
               </TouchableOpacity>
@@ -284,7 +284,7 @@ const CalculatorScreen: React.FC<Props> = ({ navigation }) => {
                   ]}
                 >
                   {selectedCourses.includes(course.id) && (
-                    <Text style={styles.checkmark}>✓</Text>
+                    <Text style={styles.checkmark}></Text>
                   )}
                 </View>
               </TouchableOpacity>

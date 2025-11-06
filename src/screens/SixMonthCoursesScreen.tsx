@@ -9,6 +9,7 @@ import {
   Linking,
   BackHandler,
   ImageBackground,
+  TouchableOpacity,
 } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import { StackNavigationProp } from '@react-navigation/stack';
@@ -29,58 +30,80 @@ interface Course {
 
 const sixMonthCourses: Course[] = [
   {
-    title: 'Child Minding',
-    description: `Purpose: To provide basic child and baby care.
+    title: 'First Aid',
+    description: `Purpose: To provide first aid awareness and basic life support.
 
-    These is the content for the child minding course:
+    This is the content for the first aid course:
 
-    - Birth to six-month old baby needs
+    - Wounds and bleeding
 
-    - Seven-Month to one year old needs
+    - Burns and fractures
 
-    - Toddler needs
+    - Emergency scene management
 
-    - Educational toys`,
+    - Cardio-pulmonary resuscitation (CPR)
+
+    - Respiratory distress e.g., choking, blocked airway`,
+
+    duration: '6 Months',
+    fee: 'R1,500',
+  },
+  {
+    title: 'Sewing',
+    description: `Purpose: Master the art of sewing and garment repair. Learn to use sewing machines, hand stitching techniques, pattern reading, and basic tailoring skills.
+
+    This is the content for the sewing course:
+
+    - Types of stitches
+
+    - Threading a sewing machine
+
+    - Sewing buttons, zips, hems, and seams
+
+    - Alterations
+
+    - Designing and sewing new garments`,
+
+    duration: '6 Months',
+    fee: 'R1,500',
+  },
+  {
+    title: 'Landscaping',
+    description: `Purpose: To provide landscaping services for new and established gardens.
+
+    This is the content for the landscaping course:
+
+    - Indigenous and exotic plants and trees
+
+    - Fixed structures (fountains, benches, built-in braai)
+
+    - Balancing of plants and trees in a garden
+
+    - Aesthetics of plant shapes and colours
+
+    - Garden layout`,
+
+    duration: '6 Months',
+    fee: 'R1,500',
+  },
+  {
+    title: 'Life Skills',
+    description: `Purpose: To provide skills to navigate basic life necessities.
+
+    This is the content for the life skills course:
+
+    - Opening a bank account 
+
+    - Basic Labour law (know your rights)
+
+    - Basic reading and writing literacy
+
+    - Basic numeric literacy`,
     
-    duration: '6 weeks',
-    fee: 'R750',
-  },
-  {
-    title: 'Cooking',
-    description: `To prepare and cook nutritious family meals.
-
-    These is the content for the cooking course:
-
-    -Nutritional requirements for a healthy body
-
-    -Types of protein, carbohydrates and vegetables
-
-    -Planning meals
-
-    -Tasty and nutritious recipes
-
-    -Preparation and cooking of meals`,
-
-    duration: '6 weeks',
-    fee: 'R750',
-  },
-  {
-    title: 'Garden Maintenance',
-    description: `Purpose: To provide knowledge of watering, pruning and planting in a domestic garden.
-
-    These is the content for the garden maintenance course:
-
-    - Watering restrictions and the watering requirements of indigenous and exotic plants
-
-    - Pruning and propagation of plants
-
-    - Planting techniques for different plant types`,
-
-    duration: '6 weeks',
-    fee: 'R750',
+    duration: '6 Months',
+    fee: 'R1,500',
   },
 ];
-
 
 const SixMonthCoursesScreen: React.FC<Props> = ({ navigation }) => {
   return (
@@ -94,29 +117,17 @@ const SixMonthCoursesScreen: React.FC<Props> = ({ navigation }) => {
           <Picker
             selectedValue=""
             onValueChange={(value) => {
-              if (value === 'BackSixMonth') navigation.navigate('SixMonthCourses');
+              if (value === 'BackHome') navigation.navigate('Home');
+              if (value === 'NextSixWeek') navigation.navigate('SixWeekCourses');
               if (value === 'Calculator') navigation.navigate('Calculator');
-              if (value === 'Home') navigation.navigate('Home');
-              if (value === 'Contact') {
-                Alert.alert(
-                  'Contact Information',
-                  'Phone: +27 11 234 5678\nEmail: info@empoweringthenation.co.za\n\nWould you like to call or email us?',
-                  [
-                    { text: 'Call', onPress: () => Linking.openURL('tel:+27112345678') },
-                    { text: 'Email', onPress: () => Linking.openURL('mailto:info@empoweringthenation.co.za') },
-                    { text: 'Cancel', style: 'cancel' },
-                  ]
-                );
-              }
             }}
             style={styles.picker}
             dropdownIconColor="#ffffff"
           >
             <Picker.Item label="Select a navigation option" value="" color="#ffffff" />
-            <Picker.Item label="← Back: Six Month Courses" value="BackSixMonth" />
-            <Picker.Item label="Next: Calculator →" value="Calculator" />
-            <Picker.Item label="🏠 Back to Home" value="Home" />
-            <Picker.Item label="📞 Contact Us" value="Contact" />
+            <Picker.Item label="Back to Home" value="BackHome" />
+            <Picker.Item label="Next: Six Week Courses" value="NextSixWeek" />
+            <Picker.Item label="Calculate Course Fees" value="Calculator" />
           </Picker>
         </View>
 
@@ -137,34 +148,21 @@ const SixMonthCoursesScreen: React.FC<Props> = ({ navigation }) => {
             ))}
           </View>
 
-          <View style={styles.infoBox}>
-            <Text style={styles.infoTitle}>About Our Six Month Programs</Text>
-            <Text style={styles.infoText}>
-              Our comprehensive six-month courses provide in-depth training and practical experience. 
-              These programs are designed to give domestic workers and gardeners advanced skills that 
-              significantly improve their marketability and career prospects.
-            </Text>
-          </View>
-
-          <View style={{ alignItems: 'center' }}>
-            <View style={styles.exitButton}>
-              <Text
-                style={styles.exitButtonText}
-                onPress={() => {
-                  Alert.alert(
-                    'Exit App',
-                    'Are you sure you want to exit the app?',
-                    [
-                      { text: 'Cancel', style: 'cancel' },
-                      { text: 'Exit', onPress: () => BackHandler.exitApp() },
-                    ]
-                  );
-                }}
-              >
-                Exit
-              </Text>
-            </View>
-          </View>
+          <TouchableOpacity
+            style={styles.exitButton}
+            onPress={() => {
+              Alert.alert(
+                'Exit App',
+                'Are you sure you want to exit the app?',
+                [
+                  { text: 'Cancel', style: 'cancel' },
+                  { text: 'Exit', onPress: () => BackHandler.exitApp() },
+                ]
+              );
+            }}
+          >
+            <Text style={styles.exitButtonText}>Exit</Text>
+          </TouchableOpacity>
         </ScrollView>
       </SafeAreaView>
     </ImageBackground>
@@ -172,34 +170,69 @@ const SixMonthCoursesScreen: React.FC<Props> = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
-  backgroundImage: { flex: 1, height: '100%', width: '100%' },
-  container: { flex: 1, backgroundColor: 'rgba(0,0,0,0.4)' },
-  scrollContent: { flexGrow: 1, padding: 20 },
-  header: { alignItems: 'center', marginBottom: 30 },
-  title: { fontSize: 40, fontWeight: 'bold', color: '#ffffff', textAlign: 'center', marginBottom: 10 },
-  subtitle: { fontSize: 32, color: '#ffffff', textAlign: 'center' },
-  coursesContainer: { marginBottom: 30 },
+  backgroundImage: {
+    flex: 1,
+    height: '100%',
+    width: '100%',
+  },
+  container: {
+    flex: 1,
+    backgroundColor: 'rgba(0, 0, 0, 0.4)',
+  },
+  scrollContent: {
+    flexGrow: 1,
+    padding: 20,
+  },
+  header: {
+    alignItems: 'center',
+    marginBottom: 30,
+  },
+  title: {
+    fontSize: 40,
+    fontWeight: 'bold',
+    color: '#ffffff',
+    textAlign: 'center',
+    marginBottom: 10,
+  },
+  subtitle: {
+    fontSize: 32,
+    color: '#ffffff',
+    textAlign: 'center',
+  },
+  coursesContainer: {
+    marginBottom: 30,
+  },
   courseCard: {
-    backgroundColor: 'rgba(248,249,250,0.9)',
+    backgroundColor: 'rgba(248, 249, 250, 0.9)',
     borderRadius: 8,
     padding: 20,
     marginBottom: 15,
     borderWidth: 1,
     borderColor: '#e9ecef',
-    
   },
-  courseTitle: { fontSize: 18, fontWeight: 'bold', color: '#000', marginBottom: 5 },
-  courseDuration: { fontSize: 14, color: '#4A90E2', fontWeight: '600', marginBottom: 10 },
-  courseDescription: { fontSize: 24, color: '#000', lineHeight: 20, marginBottom: 10 },
-  courseFee: { fontSize: 20, fontWeight: 'bold', color: '#4A90E2' },
-  infoBox: {
-    backgroundColor: 'rgba(236,240,241,0.9)',
-    borderRadius: 12,
-    padding: 20,
-    marginBottom: 30,
+  courseTitle: {
+    fontSize: 28,
+    fontWeight: 'bold',
+    color: '#000000',
+    marginBottom: 5,
   },
-  infoTitle: { fontSize: 18, fontWeight: 'bold', color: '#2c3e50', marginBottom: 1 },
-  infoText: { fontSize: 20, color: '#5d6d7e', lineHeight: 20 },
+  courseDuration: {
+    fontSize: 18,
+    color: '#4A90E2',
+    fontWeight: '600',
+    marginBottom: 10,
+  },
+  courseDescription: {
+    fontSize: 24,
+    color: '#000000',
+    lineHeight: 20,
+    marginBottom: 10,
+  },
+  courseFee: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: '#4A90E2',
+  },
   dropdownWrapper: {
     backgroundColor: '#28a745',
     paddingVertical: 5,
@@ -222,7 +255,7 @@ const styles = StyleSheet.create({
     fontSize: 24,
   },
   exitButton: {
-    backgroundColor: '#f50707ff',
+    backgroundColor: '#ff0303ff',
     paddingVertical: 15,
     paddingHorizontal: 30,
     borderRadius: 25,
@@ -231,9 +264,12 @@ const styles = StyleSheet.create({
     marginTop: 15,
     borderWidth: 1,
     borderColor: '#dee2e6',
-    width: 250,
   },
-  exitButtonText: { color: '#000000', fontSize: 24, fontWeight: 'bold' },
+  exitButtonText: {
+    color: '#000000',
+    fontSize: 24,
+    fontWeight: 'bold',
+  },
 });
 
 export default SixMonthCoursesScreen;
