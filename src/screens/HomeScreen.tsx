@@ -48,7 +48,7 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
               The company offers six-week to six month courses to domestic workers and gardeners to advance 
               their skills to make them more marketable. The aim of these courses to help the domestic 
               workers and gardeners become potential targets when they start looking for a job. To find which 
-              courses are offered please click on the buttons links below!
+              courses are offered please click on the dropdown menu below!
             </Text>
 
             {/*  Dropdown menu */}
@@ -76,14 +76,14 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
 
               <TouchableOpacity 
                 style={styles.contactButton}
-                onPress={() => Linking.openURL('tel:+27112345678')}
+                onPress={() => Linking.openURL('tel:+27797674940')}
               >
-                <Text style={styles.contactButtonText}>Call: +27 11 234 5678</Text>
+                <Text style={styles.contactButtonText}>Call: +27 79 767 4940</Text>
               </TouchableOpacity>
 
               <TouchableOpacity 
                 style={styles.contactButton}
-                onPress={() => Linking.openURL('mailto:info@empoweringthenation.co.za')}
+                onPress={() => Linking.openURL('mailto:empowering@thenation.co.za')}
               >
                 <Text style={styles.contactButtonText}>Email Us</Text>
               </TouchableOpacity>
@@ -106,7 +106,7 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
                 style={styles.nextButton}
                 onPress={() => navigation.navigate('SixWeekCourses')}
               >
-                <Text style={styles.navigationButtonText}>Next: Six Week Courses →</Text>
+                <Text style={styles.navigationButtonText}>Next: Six Week Courses</Text>
               </TouchableOpacity>
 
               <TouchableOpacity 
@@ -165,14 +165,14 @@ const styles = StyleSheet.create({
   },
   subtitle: {
     fontSize: 32,
-    color: '#000000ff',
+    color: '#dfd813ff',
     textAlign: 'center',
     marginBottom: 30,
     fontStyle: 'italic',
   },
   description: {
     fontSize: 24,
-    color: '#0c0b0bff',
+    color: '#ffffffff',
     textAlign: 'center',
     marginBottom: 20,
     lineHeight: 22,
@@ -180,7 +180,7 @@ const styles = StyleSheet.create({
   },
   detailedDescription: {
     fontSize: 24,
-    color: '#020202ff',
+    color: '#fdfdfdff',
     textAlign: 'center',
     marginBottom: 40,
     lineHeight: 22,

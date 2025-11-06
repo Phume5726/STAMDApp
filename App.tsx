@@ -5,8 +5,8 @@ import { StatusBar } from 'expo-status-bar';
 import { Image, View } from 'react-native';
 
 import HomeScreen from './src/screens/HomeScreen';
-import SixWeekCoursesScreen from './src/screens/SixWeekCoursesScreen';
 import SixMonthCoursesScreen from './src/screens/SixMonthCoursesScreen';
+import SixWeekCoursesScreen from './src/screens/SixWeekCoursesScreen';
 import CalculatorScreen from './src/screens/CalculatorScreen';
 import { RootStackParamList } from './src/types';
 
